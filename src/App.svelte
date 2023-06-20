@@ -64,7 +64,7 @@
       {#if field.name === 'address.addressLine'}
         <div class="form-group">
           <label for="addressLine">{field.label}</label>
-          <input class="form-control" type="text" " name={field.code}>
+          <input class="form-control" type="text"  name={field.code}>
         </div>
       {/if}
       {#if field.code === 'FULL_NAME'}
