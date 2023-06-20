@@ -7,28 +7,21 @@
   let firstName = '';
   let email = '';
   let mobile = '';
- 
 
   function fetchData() {
-    const formData = {
-      formId,
-    };
-    function fetchData() {
-  fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`)
-    .then(response => response.json())
-    .then(data => {
-      console.log('API Response:', data);
-      firstName = data.firstName;
-      email = data.email;
-      mobile = data.mobile;
-      // Update the form fields based on the fetched data
-      formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
-    })
-    .catch(error => {
-      console.error('API Error:', error);
-    });
-}
-
+    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('API Response:', data);
+        firstName = data.firstName;
+        email = data.email;
+        mobile = data.mobile;
+        // Check if formFields data exists before mapping
+        formFields = data.formFields ? Object.entries(data.formFields).map(([label, value]) => ({ label, value })) : [];
+      })
+      .catch(error => {
+        console.error('API Error:', error);
+      });
   }
 
   function handleSubmit() {
@@ -42,7 +35,6 @@
 
     // Perform any necessary actions on form submission
     console.log('Form Fields:', formFields);
-    
   }
 
   onMount(() => {
