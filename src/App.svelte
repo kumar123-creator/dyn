@@ -3,8 +3,7 @@
   import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
+  
 
   let fields = [];
 
@@ -42,7 +41,7 @@
 {#if fields.length > 0}
   <h2>Form Fields:</h2>
   <form>
-    <input type="hidden" id="id" name="id" value="{id}">
+  
     {#each fields as field}
       {#if field.name === 'CV/Resume'}
         <div class="form-group">
