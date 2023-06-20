@@ -3,7 +3,7 @@
   import 'bootstrap/dist/css/bootstrap.min.css'
 
   let formFields = [];
-  let formId = '72fbc0da-3810-4ad9-a922-1845f8974eb7';
+  let formId = '72fbc0da-3810-4ad9-a922-1845f8974eb7,a4fed172-671e-4d3e-810e-04f987b1c032';
   let firstName = '';
   let email = '';
   let mobile = '';
@@ -27,14 +27,7 @@
         email = data.email;
         mobile = data.mobile;
         // Update the form fields based on the fetched data
-        if (formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7') {
-          formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
-        } else if (formId === 'a4fed172-671e-4d3e-810e-04f987b1c032') {
-          formFields = [
-            { label: 'Email', value: email },
-            { label: 'Mobile', value: mobile },
-          ];
-        }
+        formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
       })
       .catch(error => {
         console.error('API Error:', error);
@@ -90,9 +83,16 @@
   <div class="form-container">
     <form on:submit|preventDefault={handleSubmit}>
       <div class="form-group">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text" id="firstName" class="form-control" bind:value={firstName} />
+        <label for="formId" class="form-label">Form ID</label>
+        <input type="text" id="formId" class="form-control" bind:value={formId} />
       </div>
+
+      {#if formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7'}
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" class="form-control" bind:value={firstName} />
+        </div>
+      {/if}
 
       <div class="form-group">
         <label for="email" class="form-label">Email</label>
