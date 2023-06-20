@@ -13,7 +13,7 @@
 
     Promise.all(
       formIds.map(id =>
-        fetch(`https://api.recruitly.io/api/candidateform/details/${id}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`, {
+        fetch(`https://api.recruitly.io/api/candidateform/details/${id}?apiKey=YOUR_API_KEY`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -101,13 +101,7 @@
 <main>
   <div class="form-container">
     <form on:submit|preventDefault={handleSubmit}>
-      <div class="form-group">
-        <label for="formId" class="form-label">Form ID</label>
-        <select id="formId" class="form-control">
-          <option value="72fbc0da-3810-4ad9-a922-1845f8974eb7">Form 1</option>
-          <option value="a4fed172-671e-4d3e-810e-04f987b1c032">Form 2</option>
-        </select>
-      </div>
+     
 
       {#if formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7'}
         <div class="form-group">
