@@ -6,7 +6,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('https://api.recruitly.io/api/candidateform/details/72fbc0da-3810-4ad9-a922-1845f8974eb7?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77');
+      const response = await fetch('https://api.recruitly.io/api/candidateform/details?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77');
       if (!response.ok) {
         throw new Error('Request failed');
       }
