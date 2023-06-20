@@ -7,17 +7,29 @@
   let firstName = '';
   let email = '';
   let mobile = '';
+ 
 
   function fetchData() {
-    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`)
+    const formData = {
+      formId,
+    };
+
+      fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`, {
+     method: 'POST',
+      headers: {
+       'Content-Type': 'application/json',
+       },
+      body: JSON.stringify(formData)
+        })
+
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
         firstName = data.firstName;
         email = data.email;
         mobile = data.mobile;
-        // Check if formFields data exists before mapping
-        formFields = data.formFields ? Object.entries(data.formFields).map(([label, value]) => ({ label, value })) : [];
+        // Update the form fields based on the fetched data
+        formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
       })
       .catch(error => {
         console.error('API Error:', error);
@@ -32,14 +44,21 @@
     formFields.push({ label: 'firstName', value: firstName });
     formFields.push({ label: 'Email', value: email });
     formFields.push({ label: 'Mobile', value: mobile });
+  
 
     // Perform any necessary actions on form submission
     console.log('Form Fields:', formFields);
   }
 
   onMount(() => {
-    // Fetch data when the component is mounted
-    fetchData();
+    // Add an event listener to form fields
+    function handleFieldChange(event) {
+      formId = event.target.value;
+      fetchData(); // Fetch data when the form ID is changed
+    }
+
+    const fields = document.querySelectorAll('input[type="text"]');
+    fields.forEach(field => field.addEventListener('input', handleFieldChange));
   });
 </script>
 
@@ -58,15 +77,20 @@
   }
 </style>
 
-<div class="form-container">
-  <form on:submit|preventDefault={handleSubmit}>
-    {#each formFields as field}
-      <div class="form-group">
-        <label for={field.label.toLowerCase()} class="form-label">{field.label}</label>
-        <input type="text" id={field.label.toLowerCase()} class="form-control" bind:value={field.value} />
-      </div>
-    {/each}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+  <form on:submit|preventDefault={handleSubmit}>
+    <div class="form-group">
+      <label for="firstName" class="form-label">firstName</label>
+      <input type="text" id="firstName" class="form-control" bind:value={firstName} />
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" id="email" class="form-control" bind:value={email} />
+    </div>
+
+    <div class="form-group">
+      <label for="mobile" class="form-label">Mobile</label>
+      <input type="text" id="mobile" class="form-control" bind:value={mobile} />
+    </div>
+    </form>
