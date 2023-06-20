@@ -80,4 +80,4 @@
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 {/if}
-<p>The string after the last slash in the URL is: {stringAfterLastSlash}</p>
+
