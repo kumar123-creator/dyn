@@ -218,6 +218,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 </svelte:head>
 
-<style>
-  /* CSS styles */
-</style>
+  <style>
+    .blue-label {
+      color: blue;
+    }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  </style>
