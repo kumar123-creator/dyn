@@ -1,4 +1,4 @@
-<!-- App.svelte -->
+
 <script>
   import { onMount } from 'svelte';
   import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,20 +30,15 @@
   }
 </style>
 
-<h2>Form Fields:</h2>
-
 {#if fields.length > 0}
+  <h2>Form Fields:</h2>
   <form>
     {#each fields as field}
       <div class="form-group">
-        {#if field.name === 'email'}
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control" type="email" id={field.code} name={field.code}>
-        {:else if field.code === 'CV'}
-          <label for={field.code}>Candidate CV</label>
+        <label for={field.code}>{field.label}</label>
+        {#if field.code === 'CV'}
           <input class="form-control-file" type="file" id={field.code} name={field.code} accept=".pdf,.doc,.docx">
         {:else}
-          <label for={field.code}>{field.label}</label>
           <input class="form-control" type="text" id={field.code} name={field.code}>
         {/if}
       </div>
