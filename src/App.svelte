@@ -7,21 +7,19 @@
   let firstName = '';
   let email = '';
   let mobile = '';
- 
 
   function fetchData() {
     const formData = {
       formId,
     };
 
-      fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`, {
-     method: 'POST',
+    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=YOUR_API_KEY`, {
+      method: 'POST',
       headers: {
-       'Content-Type': 'application/json',
-       },
-      body: JSON.stringify(formData)
-        })
-
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
@@ -29,7 +27,14 @@
         email = data.email;
         mobile = data.mobile;
         // Update the form fields based on the fetched data
-        formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
+        if (formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7') {
+          formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
+        } else if (formId === 'a4fed172-671e-4d3e-810e-04f987b1c032') {
+          formFields = [
+            { label: 'Email', value: email },
+            { label: 'Mobile', value: mobile },
+          ];
+        }
       })
       .catch(error => {
         console.error('API Error:', error);
@@ -40,7 +45,7 @@
     // Clear the formFields array before populating it
     formFields = [];
 
-    // Push the form input values to the formFields array
+    // Push the form input values to the formFields array based on the form ID
     if (formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7') {
       formFields.push({ label: 'firstName', value: firstName });
       formFields.push({ label: 'Email', value: email });
@@ -49,7 +54,6 @@
       formFields.push({ label: 'Email', value: email });
       formFields.push({ label: 'Mobile', value: mobile });
     }
-
 
     // Perform any necessary actions on form submission
     console.log('Form Fields:', formFields);
@@ -82,20 +86,25 @@
   }
 </style>
 
+<main>
+  <div class="form-container">
+    <form on:submit|preventDefault={handleSubmit}>
+      <div class="form-group">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" id="firstName" class="form-control" bind:value={firstName} />
+      </div>
 
-  <form on:submit|preventDefault={handleSubmit}>
-    <div class="form-group">
-      <label for="firstName" class="form-label">firstName</label>
-      <input type="text" id="firstName" class="form-control" bind:value={firstName} />
-    </div>
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" id="email" class="form-control" bind:value={email} />
+      </div>
 
-    <div class="form-group">
-      <label for="email" class="form-label">Email</label>
-      <input type="text" id="email" class="form-control" bind:value={email} />
-    </div>
+      <div class="form-group">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input type="text" id="mobile" class="form-control" bind:value={mobile} />
+      </div>
 
-    <div class="form-group">
-      <label for="mobile" class="form-label">Mobile</label>
-      <input type="text" id="mobile" class="form-control" bind:value={mobile} />
-    </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  </div>
+</main>
