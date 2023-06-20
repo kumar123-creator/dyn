@@ -30,7 +30,7 @@
       formId,
     };
 
-    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`, {
+    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=YOUR_API_KEY`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,9 +40,7 @@
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
-        fullname = data.fullname;
-        email = data.email;
-        mobile = data.mobile;
+       
         // Update the form fields based on the fetched data
         formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
       })
@@ -50,6 +48,7 @@
         console.error('API Error:', error);
       });
   }
+
 
   function handleSubmit() {
     // Clear the formFields array before populating it
@@ -90,14 +89,8 @@ if (formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7'){
   }
 
   onMount(() => {
-    // Add an event listener to form fields
-    function handleFieldChange(event) {
-      formId = event.target.value;
-      fetchData(); // Fetch data when the form ID is changed
-    }
-
-    const fields = document.querySelectorAll('input[type="text"]');
-    fields.forEach(field => field.addEventListener('input', handleFieldChange));
+    formId = window.location.pathname.slice(1); // Extract form ID from URL path
+    fetchData();
   });
 </script>
 
