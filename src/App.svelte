@@ -3,7 +3,7 @@
   import 'bootstrap/dist/css/bootstrap.min.css'
 
   let formFields = [];
-  let formId = '72fbc0da-3810-4ad9-a922-1845f8974eb7';
+  let formId = '';
   let firstName = '';
   let email = '';
   let mobile = '';
@@ -13,12 +13,12 @@
       formId,
     };
 
-    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`, {
+    fetch(`https://api.recruitly.io/api/candidateform/details/${formId}?apiKey=YOUR_API_KEY`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     })
       .then(response => response.json())
       .then(data => {
@@ -26,16 +26,8 @@
         firstName = data.firstName;
         email = data.email;
         mobile = data.mobile;
-
-        // Update the form fields based on the fetched data and selected form ID
-        if (formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7') {
-          formFields = [{ label: 'firstName', value: firstName }];
-        } else if (formId === 'a4fed172-671e-4d3e-810e-04f987b1c032') {
-          formFields = [
-            { label: 'Email', value: email },
-            { label: 'Mobile', value: mobile }
-          ];
-        }
+        // Update the form fields based on the fetched data
+        formFields = Object.entries(data.formFields).map(([label, value]) => ({ label, value }));
       })
       .catch(error => {
         console.error('API Error:', error);
@@ -59,14 +51,8 @@
   }
 
   onMount(() => {
-    // Add an event listener to form fields
-    function handleFieldChange(event) {
-      formId = event.target.value;
-      fetchData(); // Fetch data when the form ID is changed
-    }
-
-    const selectField = document.querySelector('select');
-    selectField.addEventListener('change', handleFieldChange);
+    formId = window.location.pathname.slice(1); // Extract form ID from URL path
+    fetchData();
   });
 </script>
 
@@ -87,20 +73,13 @@
 
 <main>
   <div class="form-container">
-    <select bind:value={formId} class="form-control">
-      <option value="72fbc0da-3810-4ad9-a922-1845f8974eb7">Form 1</option>
-      <option value="a4fed172-671e-4d3e-810e-04f987b1c032">Form 2</option>
-    </select>
-
     <form on:submit|preventDefault={handleSubmit}>
       {#if formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7'}
         <div class="form-group">
           <label for="firstName" class="form-label">First Name</label>
           <input type="text" id="firstName" class="form-control" bind:value={firstName} />
         </div>
-      {/if}
-
-      {#if formId === 'a4fed172-671e-4d3e-810e-04f987b1c032'}
+      {:else if formId === 'a4fed172-671e-4d3e-810e-04f987b1c032'}
         <div class="form-group">
           <label for="email" class="form-label">Email</label>
           <input type="text" id="email" class="form-control" bind:value={email} />
@@ -111,7 +90,6 @@
           <input type="text" id="mobile" class="form-control" bind:value={mobile} />
         </div>
       {/if}
-
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
