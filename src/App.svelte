@@ -46,19 +46,19 @@
   <h2>Form Fields:</h2>
   <form>
     {#each fields as field (field.code)}
-    {#if field.name === 'CV/Resume'}
+    {#if field.code === 'CV/Resume'}
     <div class="form-group">
       <label for="cvResume">{field.label}</label>
       <input class="form-control-file" type="file" id="cvResume" name={field.code} accept=".pdf,.doc,.docx">
     </div>
   {/if}
-  {#if field.name === 'email'}
+  {#if field.code === 'email'}
     <div class="form-group">
       <label for="email">{field.label}</label>
       <input class="form-control" type="email" id="email" name={field.code}>
     </div>
   {/if}
-  {#if field.name === 'mobile'}
+  {#if field.code === 'mobile'}
     <div class="form-group">
       <label for="mobile">{field.label}</label>
       <input class="form-control" type="tel" id="mobile" name={field.code}>
