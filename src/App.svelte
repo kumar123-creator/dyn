@@ -82,17 +82,13 @@
 <main>
   <div class="form-container">
     <form on:submit|preventDefault={handleSubmit}>
-      <div class="form-group">
-        <label for="formId" class="form-label">Form ID</label>
-        <input type="text" id="formId" class="form-control" bind:value={formId} />
-      </div>
+     
 
-      {#if formId === '72fbc0da-3810-4ad9-a922-1845f8974eb7'}
         <div class="form-group">
           <label for="firstName" class="form-label">First Name</label>
           <input type="text" id="firstName" class="form-control" bind:value={firstName} />
         </div>
-      {/if}
+      
 
       <div class="form-group">
         <label for="email" class="form-label">Email</label>
