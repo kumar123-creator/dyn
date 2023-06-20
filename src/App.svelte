@@ -2,11 +2,17 @@
   import { onMount } from 'svelte';
   import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
+
   let fields = [];
 
-  onMount(async () => {
+  const fetchData = async () => {
+    const url = `https://api.recruitly.io/api/candidateform/details?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77`;
+
     try {
-      const response = await fetch('https://api.recruitly.io/api/candidateform/details?apiKey=TEST45684CB2A93F41FC40869DC739BD4D126D77');
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Request failed');
       }
@@ -20,6 +26,10 @@
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+  };
+
+  onMount(() => {
+    fetchData();
   });
 </script>
 
@@ -32,39 +42,38 @@
 {#if fields.length > 0}
   <h2>Form Fields:</h2>
   <form>
+    <input type="hidden" id="id" name="id" value="{id}">
     {#each fields as field}
       {#if field.name === 'CV/Resume'}
         <div class="form-group">
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control-file" type="file" id={field.code} name={field.code} accept=".pdf,.doc,.docx">
+          <label for="cvResume">{field.label}</label>
+          <input class="form-control-file" type="file" id="cvResume" name={field.code} accept=".pdf,.doc,.docx">
         </div>
       {/if}
       {#if field.name === 'email'}
         <div class="form-group">
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control" type="email" id={field.code} name={field.code}>
+          <label for="email">{field.label}</label>
+          <input class="form-control" type="email" id="email" name={field.code}>
         </div>
       {/if}
       {#if field.name === 'mobile'}
         <div class="form-group">
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control" type="tel" id={field.code} name={field.code}>
+          <label for="mobile">{field.label}</label>
+          <input class="form-control" type="tel" id="mobile" name={field.code}>
         </div>
       {/if}
       {#if field.name === 'address.addressLine'}
         <div class="form-group">
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control" type="text" id={field.code} name={field.code}>
+          <label for="addressLine">{field.label}</label>
+          <input class="form-control" type="text" id="addressLine" name={field.code}>
         </div>
       {/if}
-      {#if field.code=== 'FULL_NAME'}
+      {#if field.code === 'FULL_NAME'}
         <div class="form-group">
-          <label for={field.code}>{field.label}</label>
-          <input class="form-control" type="text" id={field.code} name={field.code}>
+          <label for="fullName">{field.label}</label>
+          <input class="form-control" type="text" id="fullName" name={field.code}>
         </div>
       {/if}
-     
-      
     {/each}
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
