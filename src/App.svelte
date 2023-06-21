@@ -1,4 +1,4 @@
-<script>
+ <script>
   import { onMount } from 'svelte';
   import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -82,49 +82,49 @@
           <input class="form-control" type="text"  name={field.code} placeholder="languages">
         </div>
       {/if}
-      {#if field.code==='weav04e7bf4b25574e419d7a36399d579c86'}
+      {#if field.name==='weav04e7bf4b25574e419d7a36399d579c86'}
         <div class="form-group">
           <label for="Experience">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Experience">
         </div>
       {/if}
-      {#if field.code==='weava647dfe7b2c44d7cbf1be28e231018d1'}
+      {#if field.name=='weava647dfe7b2c44d7cbf1be28e231018d1'}
         <div class="form-group">
           <label for="Date of birth">{field.label}</label>
           <input class="form-control" type="Date"  name={field.code} placeholder="Date of Birth">
         </div>
       {/if}
-      {#if field.code==='hiref22f319e4f1543f9975cdc851dd6e29a'}
+      {#if field.name==='Years Of Experience'}
         <div class="form-group">
           <label for="Years of experience">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Years of Experience">
         </div>
       {/if}
-      {#if field.code==='hire8b79d76fb0c442d0b3daac1f5450021d'}
+      {#if field.name ==='Qualification'}
         <div class="form-group">
           <label for="Qualification">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Qualification">
         </div>
       {/if}
-      {#if field.code==='hire3e509b9cc2964bef8b1a94d80633ca4a'}
+      {#if field.name ==='Rating'}
         <div class="form-group">
           <label for="Rating">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Rating">
         </div>
       {/if}
-      {#if field.code==='GENDER'}
+      {#if field.name ==='Gender'}
         <div class="form-group">
           <label for="gender">{field.label}</label>
           <input class="form-control" type="text"  id="gender" name={field.code} placeholder="Gender" >
         </div>
       {/if}
-      {#if field.code==='INDUSTRY'}
+      {#if field.name ==='Industry'}
         <div class="form-group">
           <label for="industry">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Industry" >
         </div>
       {/if}
-      {#if field.code === 'hire1bd89e6e0c9a4828a84c994519309dec'}
+      {#if field.name === 'Language Level'}
         <div class="form-group">
           <label for="Languages Level">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Languages Level">
