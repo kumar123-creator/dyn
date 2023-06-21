@@ -42,15 +42,16 @@
 </style>
 
 {#if fields.length > 0}
-  <h2>Form Fields:</h2>
+  <h2>DYNAMIC FORM:</h2>
   <form>
     {#each fields as field (field.code)}
-      {#if field.code === 'CV'}
+     {#if field.code === 'FULL_NAME'}
         <div class="form-group">
-          <label for="cvResume">{field.label}</label>
-          <input class="form-control-file" type="file"  name={field.code} accept=".pdf,.doc,.docx" >
+          <label for=" Enter FullName">{field.label}</label>
+          <input class="form-control" type="text"  name={field.code} placeholder="Enter Your FullName">
         </div>
       {/if}
+     
       {#if field.code === 'EMAIL'}
         <div class="form-group">
           <label for="email">{field.label}</label>
@@ -63,16 +64,16 @@
           <input class="form-control" type="tel" name={field.code} placeholder="Enter Your Mobile Number">
         </div>
       {/if}
+     {#if field.code === 'CV'}
+        <div class="form-group">
+          <label for="cvResume">{field.label}</label>
+          <input class="form-control-file" type="file"  name={field.code} accept=".pdf,.doc,.docx" >
+        </div>
+      {/if}
       {#if field.code === 'ADDRESS'}
         <div class="form-group">
           <label for="addressLine">{field.label}</label>
           <input class="form-control" type="text"  name={field.code} placeholder="Write Your full Address">
-        </div>
-      {/if}
-      {#if field.code === 'FULL_NAME'}
-        <div class="form-group">
-          <label for=" Enter FullName">{field.label}</label>
-          <input class="form-control" type="text"  name={field.code} placeholder="Enter Your FullName">
         </div>
       {/if}
       {#if field.code === 'LANGUAGES'}
